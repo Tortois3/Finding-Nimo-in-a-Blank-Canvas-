@@ -1,0 +1,77 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+	  <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <EnableWindowsTargeting>true</EnableWindowsTargeting>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ApplicationHighDpiMode>PerMonitorV2</ApplicationHighDpiMode>
+    <SuppressTfmSupportBuildWarnings>true</SuppressTfmSupportBuildWarnings>
+    <GenerateResourceWarnOnBinaryFormatterUse>false</GenerateResourceWarnOnBinaryFormatterUse>
+    <NoWarn>$(NoWarn);CA1416;CS8632;CS0169</NoWarn>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateTargetFrameworkAttribute>false</GenerateTargetFrameworkAttribute>
+    <GenerateTargetPlatformAttribute>false</GenerateTargetPlatformAttribute>
+    <BaseOutputPath>$(LocalAppData)\FindingNimo\GameForms\bin\</BaseOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LibVLCSharp.WinForms" Version="3.9.6" />
+    <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="11.0.0-preview.2.26159.112" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.5-beta1" />
+  </ItemGroup>
+
+  <!-- Ensure the GameProj project is built when launching the launcher so the GameProj.exe exists -->
+  <ItemGroup>
+    <!-- Build GameProj before the launcher but avoid adding its output assembly as a design-time reference
+         which can cause MSBuild to load the project's assemblies into the MSBuild process and trigger
+         Windows blocking for unsigned DLLs. -->
+    <ProjectReference Include="..\GameProj\GameProj.csproj" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Content\Data\GameDialogue.db">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <!-- Prevent the launcher project from triggering a single-file publish during Debug builds -->
+  <PropertyGroup Condition="'$(Configuration)'=='Debug'">
+    <PublishSingleFile>false</PublishSingleFile>
+  </PropertyGroup>
+
+  <!-- Allow single-file publish for Release builds if desired -->
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <PublishSingleFile>true</PublishSingleFile>
+    <PublishTrimmed>false</PublishTrimmed>
+  </PropertyGroup>
+
+  <!-- Only publish the GameProj single-file launcher for Release builds to avoid build loops during development.
+       Also skip if SkipLauncherPublish is explicitly set, and avoid redundant publishes by checking for the output exe. -->
+  <Target Name="PublishGameProjForLauncher" BeforeTargets="Build" Condition="'$(DesignTimeBuild)' != 'true' and '$(Configuration)' == 'Release' and '$(SkipLauncherPublish)' != 'true'">
+    <Message Text="Publishing single-file GameProj launcher build (Release only)..." Importance="High" />
+
+    <!-- Only run publish if the launcher output executable does not already exist, or when forced via PublishLauncherForce=true -->
+    <Exec Condition="'$(PublishLauncherForce)' == 'true' or !Exists('..\GameProj\launcher-publish\$(Configuration)\win-x64\GameProj.exe')"
+          Command='dotnet publish "..\GameProj\GameProj.csproj" -c $(Configuration) -r win-x64 --self-contained true --no-restore -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:SkipLauncherPublish=true -o "..\GameProj\launcher-publish\$(Configuration)\win-x64"'
+          />
+  </Target>
+
+</Project>

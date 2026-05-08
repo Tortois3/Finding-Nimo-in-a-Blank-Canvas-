@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36915.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameForms", "GameForms.csproj", "{022DF581-5B7B-48A2-9A82-083D2A5BB123}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameProj", "..\GameProj\GameProj.csproj", "{6E37EEFB-DC5D-0FA4-DEA5-D5483D9531A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{022DF581-5B7B-48A2-9A82-083D2A5BB123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{022DF581-5B7B-48A2-9A82-083D2A5BB123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{022DF581-5B7B-48A2-9A82-083D2A5BB123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{022DF581-5B7B-48A2-9A82-083D2A5BB123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E37EEFB-DC5D-0FA4-DEA5-D5483D9531A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E37EEFB-DC5D-0FA4-DEA5-D5483D9531A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E37EEFB-DC5D-0FA4-DEA5-D5483D9531A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E37EEFB-DC5D-0FA4-DEA5-D5483D9531A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {573CA395-489F-470A-ABA2-213C32DDDBD7}
+	EndGlobalSection
+EndGlobal

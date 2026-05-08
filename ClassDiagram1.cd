@@ -1,0 +1,324 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="GameForms.Forms.Form_About">
+    <Position X="5.25" Y="15.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAAAACAAAhAAAACAAAACAAAAAAAAAAABAQBBAAA=</HashCode>
+      <FileName>Forms\Form_About.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_History">
+    <Position X="3.25" Y="15.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgARAAAAACAAAhgAAACAGAACAICAAAAIAAABAQRBAAA=</HashCode>
+      <FileName>Forms\Form_History.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Exit">
+    <Position X="11.5" Y="15.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AhAAAAAAQCAAAhAAAACAAAACAIACAAAAAEABAQABQAA=</HashCode>
+      <FileName>Forms\Form_OkCancel.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_Welcome">
+    <Position X="9.5" Y="15.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AgAAAAQAACAAAhAAAACAAAACAAAAAAAAAAABAQABAAA=</HashCode>
+      <FileName>Forms\Form_Welcome.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Form1_Info">
+    <Position X="7.25" Y="15.5" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CkAAAcEAQCAAAhRAAACIAAACAAQtAAAAAAAAgwAHEAI=</HashCode>
+      <FileName>Forms\Form1_Info.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="IUserRepository" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameForms.Form2">
+    <Position X="6" Y="7.75" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Form_Welcome" Type="GameForms.Forms.Form_Welcome" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="8.5" Y="14.5" />
+        <Point X="10.438" Y="14.5" />
+        <Point X="10.438" Y="15.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="IUserRepository" Type="GameForms.Data.IUserRepository" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="7.562" Y="7.75" />
+        <Point X="7.562" Y="7.125" />
+        <Point X="11.25" Y="7.125" />
+        <Point X="11.25" Y="2.671" />
+        <Point X="11.292" Y="2.671" Type="JumpStart" />
+        <Point X="11.458" Y="2.671" Type="JumpEnd" />
+        <Point X="12" Y="2.671" />
+        <Point X="12" Y="2.296" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>CECJAJQRi6UAADQQAICBCAASQsY5EBBAJdAOAADKhAQ=</HashCode>
+      <FileName>Forms\Form2.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form1_Info" />
+      <Property Name="Exit" />
+      <Property Name="Form_About" />
+      <Property Name="Form_Welcome" />
+      <Property Name="Form4" />
+      <Property Name="Form_Achievement" />
+      <Property Name="UserInfo" />
+      <Property Name="IUserRepository" />
+      <Property Name="Form3" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameForms.Form3">
+    <Position X="9.25" Y="7.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAQACAAABAAAACAAAACAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Form3.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.History">
+    <Position X="0.75" Y="15.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <AssociationLine Name="Form_History" Type="GameForms.Forms.Form_History">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="-0.107" Y="0.06" Height="0.182" Width="0.943" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AgAAAQAAQCAAAhAAAACAAAASAAAIAAAAAEABAQABAAA=</HashCode>
+      <FileName>Forms\History.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form_History" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameForms.Form1">
+    <Position X="2.5" Y="7.75" Width="2.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>IACAIAAAArlAAAAQAACACAACQAoJAABAJJQAAAhABAA=</HashCode>
+      <FileName>Forms\Form1.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Form2" />
+      <Property Name="Exit" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameForms.Program">
+    <Position X="6" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form4">
+    <Position X="11.75" Y="7.75" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAGAUApBAAACAAEACIAAAABgAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\Form4.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="UserInfo" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="GameForms.Forms.Form_Achievement">
+    <Position X="14.5" Y="15.5" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GameForms.Forms.Form_Achievement.AchievementStatus" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\Form_Achievement.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CiD/ASAABCYAgBQgAAGBCEBDUsNoAAAIgEIQBSBAUAA=</HashCode>
+      <FileName>Forms\Form_Achievement.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Data.UserInfo">
+    <Position X="3.25" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAAAAAAAAEAAAAAgAAAAAAACAAAAAAAAAAA=</HashCode>
+      <FileName>UserInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Data.FileUserRepository">
+    <Position X="9" Y="0.5" Width="1.75" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>CAAAAAAgAQACAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserPersistence.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="GameForms.Forms.Form_Admin">
+    <Position X="0.75" Y="20" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AkAAAYSAQCEAABIAAACIAAACBAQFAAAAAgAAAQAHAAI=</HashCode>
+      <FileName>Forms\Form_Admin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_Analytic">
+    <Position X="3.25" Y="19.75" Width="3" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GameForms.Forms.Form_Analytic.SceneAnalyticsRow" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\Form_Analytic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+      <Class Name="GameForms.Forms.Form_Analytic.ActionAnalyticsRow" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\Form_Analytic.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IiCCAAwQAiKogBAAgBSAAIAKAQAAEgAFAGAAAAAAAQA=</HashCode>
+      <FileName>Forms\Form_Analytic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_Creator">
+    <Position X="6.75" Y="20" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GameForms.Forms.Form_Creator.RatingBucket" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\Form_Creator.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AggAQEQAECCAABAEAACAAAACAQAEAoAEAAAAAAAAhAA=</HashCode>
+      <FileName>Forms\Form_Creator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_LogIn">
+    <Position X="12.25" Y="20" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AkAIAYAAQCAAARAAAACIAAACBAQFACAIAAAACwAHAAI=</HashCode>
+      <FileName>Forms\Form_LogIn.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Forms.Form_Memoir">
+    <Position X="9.5" Y="19.75" Width="2.25" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <NestedTypes>
+      <Class Name="GameForms.Forms.Form_Memoir.MemoirEntry" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Forms\Form_Memoir.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ACAAAAEQgSABAhQYBACCBABSIOg4AoAAMHkEAAIIACA=</HashCode>
+      <FileName>Forms\Form_Memoir.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.DatabaseMaintenance">
+    <Position X="11.5" Y="3.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAAAAAAAAAAEAAAAAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>DatabaseMaintenance.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.HistoryLogService">
+    <Position X="9.5" Y="3.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAABAIAA=</HashCode>
+      <FileName>HistoryLogService.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.PlayerSession">
+    <Position X="1.25" Y="3.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAEAABAAAAAAAAAAAIAAAAAAAAEIAAAAAAAIgABEAAA=</HashCode>
+      <FileName>PlayerSession.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.Data.SqlitePlayerRepository">
+    <Position X="4.5" Y="3.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAEAAIACAAAAQBAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>UserPersistence.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameForms.WindowsMediaPlayerHost">
+    <Position X="7" Y="3.75" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AQAAAAAAAAAAAAAAAAIACAAAICAAAAAAAgAAAQAAAAA=</HashCode>
+      <FileName>WindowsMediaPlayerHost.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Interface Name="GameForms.Data.IUserRepository">
+    <Position X="11" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UserPersistence.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
