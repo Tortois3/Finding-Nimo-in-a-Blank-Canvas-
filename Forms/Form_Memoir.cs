@@ -32,11 +32,13 @@ namespace GameForms.Forms
             InitializeMemoirLayout();
             WireMemoirPersistence();
             Load += Form_Memoir_Load;
+            Shown += Form_Memoir_Shown;
             FormEscapeCloseBehavior.Attach(this);
 
             this.FormBorderStyle = FormBorderStyle.None;
-
-
+            this.StartPosition = FormStartPosition.CenterParent;
+            this.ShowInTaskbar = false;
+            this.TopMost = true;
         }
 
         private void InitializeMemoirLayout()
@@ -69,12 +71,8 @@ namespace GameForms.Forms
             button3.Click += (_, _) => ShowMemoirPage(4);
             button5.Click -= button5_Click;
             button5.Click += (_, _) => ShowMemoirPage(5);
-            // when wiring/unwiring, guard null to avoid runtime NREs
-            if (button8 != null)
-            {
-                button8.Click -= button8_Click_1;
-                button8.Click += (_, _) => ShowMemoirPage(0);
-            }
+            button8.Click -= button8_Click_1;
+            button8.Click += (_, _) => ShowMemoirPage(0);
             button11.Click -= button11_Click;
             button11.Click += (_, _) => ShowMemoirPage(2);
             button7.Click -= button7_Click;
@@ -123,6 +121,11 @@ namespace GameForms.Forms
             ShowMemoirPage(0);
         }
 
+        private void Form_Memoir_Shown(object? sender, EventArgs e)
+        {
+            EnsureMemoirVisible();
+        }
+
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             SaveMemoirContent();
@@ -156,6 +159,24 @@ namespace GameForms.Forms
                 page.Hide();
 
             panelAbout.Hide();
+        }
+
+        private void EnsureMemoirVisible()
+        {
+            if (Width < 400 || Height < 400)
+                ClientSize = new Size(862, 1022);
+
+            ABOUT.Visible = true;
+            button6.Visible = true;
+            label1.Visible = true;
+            panelAbout.Visible = false;
+
+            ShowMemoirPage(_currentPageIndex < 0 ? 0 : _currentPageIndex);
+            ABOUT.BringToFront();
+            button6.BringToFront();
+            label1.BringToFront();
+            BringToFront();
+            Activate();
         }
 
         private void LoadMemoirContent()
@@ -237,6 +258,11 @@ namespace GameForms.Forms
             this.Close();
         }
 
+        private void button8_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void button7_Click(object sender, EventArgs e)//page 4 prev page
         {
             ShowMemoirPage(3);
@@ -254,7 +280,7 @@ namespace GameForms.Forms
 
         private void button8_Click_1(object sender, EventArgs e) //page 2 prev page
         {
-            ShowMemoirPage(1);
+            ShowMemoirPage(0);
         }
     }
 }

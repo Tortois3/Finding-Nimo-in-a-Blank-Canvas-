@@ -33,8 +33,7 @@ namespace GameForms
             _startupPlayerId = startupPlayerId;
 
             InitializeComponent();
-            // Ensure memoir button visibility is evaluated at runtime once player context is available.
-            // Start with visible=false to avoid flashing prior to evaluation.
+            
             memoir.Visible = openMemoirOnShown;
             USERINFO.Visible = true;
 
@@ -204,7 +203,7 @@ namespace GameForms
 
         private async Task UpdateMemoirVisibilityAsync()
         {
-            // Ensure latest player state is populated and then refresh memoir button visibility.
+            // Ensure latest player state is populated 
             try
             {
                 if (!PlayerSession.HasActivePlayer && !PlayerSession.IsEmptyAccount)
@@ -219,10 +218,8 @@ namespace GameForms
             }
             catch
             {
-                // ignore
             }
 
-            // Evaluate and apply visibility on UI thread
             try
             {
                 if (InvokeRequired)
@@ -236,7 +233,6 @@ namespace GameForms
             }
             catch
             {
-                // ignore
             }
         }
 
@@ -503,8 +499,30 @@ namespace GameForms
             if (PlayerSession.HasActivePlayer)
                 HistoryLogService.QuickLog("PLAYER", "Opened Achievements.");
 
-            using Form_Achievement form = new Form_Achievement();
-            form.ShowDialog(this);
+            // Temporarily release the intro ActiveX player so the achievement
+            // form (a top-level window) can appear above the media host. The
+            // embedded WindowsMediaPlayer (an AxHost) may otherwise stay on
+            // top of other windows.
+            bool hadIntroPlayer = _gameIntroPlayer != null;
+            try
+            {
+                ReleaseIntroPlayer();
+
+                using Form_Achievement form = new Form_Achievement();
+                form.ShowDialog(this);
+            }
+            finally
+            {
+                // Restore the intro if it was running before.
+                if (hadIntroPlayer)
+                {
+                    StartIntroLoop();
+                }
+
+                BringToFront();
+                Activate();
+                RestoreFrontUiOrder();
+            }
         }
 
         private void TryInitializeIntroPlayer()
@@ -523,7 +541,6 @@ namespace GameForms
                     UiMode = "none"
                 };
 
-                // Remove any existing media host controls but keep other UI controls (e.g. memoir, USERINFO)
                 for (int i = GameIntroHost.Controls.Count - 1; i >= 0; i--)
                 {
                     if (GameIntroHost.Controls[i] is WindowsMediaPlayerHost)
@@ -535,14 +552,12 @@ namespace GameForms
                 }
 
                 GameIntroHost.Controls.Add(_gameIntroPlayer);
-                // Ensure the media is behind the interactive buttons
                 _gameIntroPlayer.SendToBack();
                 RestoreFrontUiOrder();
             }
             catch
             {
                 _gameIntroPlayer = null;
-                // Remove any failing media hosts but preserve the static UI controls
                 for (int i = GameIntroHost.Controls.Count - 1; i >= 0; i--)
                 {
                     if (GameIntroHost.Controls[i] is WindowsMediaPlayerHost)

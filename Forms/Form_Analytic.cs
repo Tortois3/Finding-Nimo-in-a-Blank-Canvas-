@@ -511,7 +511,6 @@ namespace GameForms.Forms
         private void button1_Click(object sender, EventArgs e)
         {
             // rating chosen in combo (use SelectedItem if available, otherwise Text)
-            // prefer a control named 'combo' if it exists, otherwise use 'attemptComboBox'
             ComboBox ratingCombo = null;
             try { ratingCombo = (ComboBox)typeof(Form_Analytic).GetField("combo", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Public)?.GetValue(this); } catch { }
             ratingCombo ??= attemptComboBox;

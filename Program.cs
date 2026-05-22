@@ -24,12 +24,10 @@ namespace GameForms
             try
             {
                 int? startupPlayerId = ParsePlayerId(args);
-                // If caller requested to open the memoir directly, launch Form2 and auto-open memoir.
-                // This is used when the game (GameProj) directs the user to the memoir via --memoir.
+              
                 bool openMemoir = args != null && args.Length > 0 && Array.Exists(args, a => string.Equals(a, "--memoir", StringComparison.OrdinalIgnoreCase));
                 if (openMemoir)
                 {
-                    // Use the same database path as Form2's default so player lookup works as expected.
                     var repo = new GameForms.Data.SqlitePlayerRepository(@"C:\Users\Tiffany Mae\Documents\PROJECT PROPOSAL\GameDialogue.db");
                     Application.Run(new Form2(repo, openMemoirOnShown: true, startupPlayerId: startupPlayerId));
                 }

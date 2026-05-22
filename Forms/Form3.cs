@@ -28,9 +28,8 @@ namespace GameForms
 
         private void Form3_Load(object sender, EventArgs e)
         {
-            timer1.Interval = 1000; // half a second
-            // Attach the exact handler name below. Make sure there's only one handler with this exact name.
-            timer1.Tick -= timer1_Tick; // safe to remove any previous attachment
+            timer1.Interval = 1000; 
+            timer1.Tick -= timer1_Tick;
             timer1.Tick += timer1_Tick;
             timer1.Start();
         }

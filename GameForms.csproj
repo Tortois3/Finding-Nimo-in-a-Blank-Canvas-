@@ -69,9 +69,7 @@
     <Message Text="Publishing single-file GameProj launcher build (Release only)..." Importance="High" />
 
     <!-- Only run publish if the launcher output executable does not already exist, or when forced via PublishLauncherForce=true -->
-    <Exec Condition="'$(PublishLauncherForce)' == 'true' or !Exists('..\GameProj\launcher-publish\$(Configuration)\win-x64\GameProj.exe')"
-          Command='dotnet publish "..\GameProj\GameProj.csproj" -c $(Configuration) -r win-x64 --self-contained true --no-restore -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:SkipLauncherPublish=true -o "..\GameProj\launcher-publish\$(Configuration)\win-x64"'
-          />
+    <Exec Condition="'$(PublishLauncherForce)' == 'true' or !Exists('..\GameProj\launcher-publish\$(Configuration)\win-x64\GameProj.exe')" Command="dotnet publish &quot;..\GameProj\GameProj.csproj&quot; -c $(Configuration) -r win-x64 --self-contained true --no-restore -p:PublishSingleFile=true -p:IncludeAllContentForSelfExtract=true -p:SkipLauncherPublish=true -o &quot;..\GameProj\launcher-publish\$(Configuration)\win-x64&quot;" />
   </Target>
 
 </Project>

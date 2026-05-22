@@ -249,17 +249,13 @@ namespace GameForms
             }
         }
 
-        // Wire clicks/mousedown of every control (recursively) to Start, except controls you want to keep.
-        // Update skipNames to include any control names that must retain their original behavior (e.g. EXIT).
         private void WireStartEverywhere()
         {
             var skipNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
             {
-                "EXIT" // keep original EXIT behavior
-                // add other control names here if needed
+                "EXIT"
             };
 
-            // Wire top-level form mouse events too
             this.MouseDown -= Control_StartMouseDown;
             this.MouseDown += Control_StartMouseDown;
 
@@ -275,20 +271,17 @@ namespace GameForms
                     if (string.IsNullOrEmpty(c.Name) || skipNames.Contains(c.Name))
                         continue;
 
-                    // Attach both Click and MouseDown to be sure we catch input on different control types.
                     c.Click -= Control_StartClick;
                     c.Click += Control_StartClick;
 
                     c.MouseDown -= Control_StartMouseDown;
                     c.MouseDown += Control_StartMouseDown;
 
-                    // If control hosts children, wire them too
                     if (c.HasChildren)
                         WireControlsForStart(c.Controls, skipNames);
                 }
                 catch
                 {
-                    // Swallow exceptions so wiring never breaks startup; missing resources or special controls might throw.
                 }
             }
         }
@@ -300,7 +293,6 @@ namespace GameForms
 
         private void Control_StartMouseDown(object? sender, MouseEventArgs e)
         {
-            // Only start for left-button presses to avoid interfering with right-click context menus.
             if (e.Button == MouseButtons.Left)
                 StopToForm2();
         }

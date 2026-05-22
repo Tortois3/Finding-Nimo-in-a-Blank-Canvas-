@@ -47,6 +47,9 @@ namespace GameForms.Forms
             FormLayoutHelper.Configure(this);
             FormEscapeCloseBehavior.Attach(this);
             this.FormBorderStyle = FormBorderStyle.None;
+            this.StartPosition = FormStartPosition.Manual;
+            this.ShowInTaskbar = false;
+            this.TopMost = true;
 
             this.Shown += Form_Achievement_Shown;
 
@@ -72,6 +75,7 @@ namespace GameForms.Forms
         private void Form_Achievement_Shown(object? sender, EventArgs e)
         {
             PositionAtRightSide();
+            EnsureAchievementVisible();
         }
 
         private void Form_Achievement_Load_1(object sender, EventArgs e)
@@ -360,8 +364,9 @@ namespace GameForms.Forms
         private void PositionAtRightSide()
         {
             Rectangle targetBounds = Owner?.Bounds ?? Screen.FromControl(this).WorkingArea;
-            int x = targetBounds.Right - Width;
-            int y = targetBounds.Top;
+            const int margin = 16;
+            int x = targetBounds.Right - Width - margin;
+            int y = targetBounds.Top + margin;
 
             if (x < 0)
                 x = 0;
@@ -369,6 +374,25 @@ namespace GameForms.Forms
                 y = 0;
 
             Location = new Point(x, y);
+        }
+
+        private void EnsureAchievementVisible()
+        {
+            if (Width < 300 || Height < 300)
+                ClientSize = new Size(755, 1055);
+
+            panel.Visible = true;
+            panel1.Visible = true;
+            panel2.Visible = true;
+            panel5.Visible = true;
+            panel8.Visible = true;
+            pictureBox1.SendToBack();
+            panel.BringToFront();
+            label1.BringToFront();
+            label2.BringToFront();
+            button1.BringToFront();
+            BringToFront();
+            Activate();
         }
 
         private static string ResolveDisplayAchievementName(int endingId, string achievementName)

@@ -149,20 +149,53 @@ namespace GameForms.Forms
         private static string? ResolveGameExePath()
         {
             string baseDirectory = AppContext.BaseDirectory;
+            string localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            string projectRoot = @"C:\Users\Tiffany Mae\Documents\PROJECT PROPOSAL";
 
-            string[] candidatePaths =
+            // Prefer GameProj's own build output. The launcher output can contain an older copied
+            // GameProj.exe, so same-folder candidates are intentionally kept near the end.
+            var candidates = new List<string>
             {
-                Path.Combine(baseDirectory, "GameProj.exe"),
-                Path.Combine(baseDirectory, "..", "..", "..", "..", "GameProj", "bin", "Debug", "net8.0-windows", "GameProj.exe"),
-                Path.Combine(baseDirectory, "..", "..", "..", "..", "GameProj", "bin", "Release", "net8.0-windows", "GameProj.exe"),
-                @"C:\Users\Tiffany Mae\Documents\PROJECT PROPOSAL\GameProj\bin\Debug\net8.0-windows\GameProj.exe",
-                @"C:\Users\Tiffany Mae\Documents\PROJECT PROPOSAL\GameProj\bin\Release\net8.0-windows\GameProj.exe",
-                @"C:\Users\Tiffany Mae\AppData\Local\FindingNimo\GameProj\Debug\win-x64\GameProj.exe",
-                @"C:\Users\Tiffany Mae\AppData\Local\FindingNimo\GameProj\Release\win-x64\GameProj.exe"
+                Path.Combine(localAppData, "FindingNimo", "GameProj", "bin", "Debug", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(localAppData, "FindingNimo", "GameProj", "bin", "Release", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(projectRoot, "GameProj", "bin", "Debug", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(projectRoot, "GameProj", "bin", "Release", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(projectRoot, "GameProj", "launcher-publish", "Debug", "win-x64", "GameProj.exe"),
+                Path.Combine(projectRoot, "GameProj", "launcher-publish", "Release", "win-x64", "GameProj.exe")
             };
 
-            return candidatePaths
-                .Select(Path.GetFullPath)
+            // If we can find a sibling GameProj project directory above, prefer its bin outputs
+            try
+            {
+                var dir = new DirectoryInfo(baseDirectory);
+                for (int i = 0; i < 6 && dir != null; i++)
+                {
+                    var sibling = Path.Combine(dir.FullName, "GameProj");
+                    if (Directory.Exists(sibling))
+                    {
+                        candidates.Add(Path.Combine(sibling, "bin", "Debug", "net8.0-windows", "GameProj.exe"));
+                        candidates.Add(Path.Combine(sibling, "bin", "Release", "net8.0-windows", "GameProj.exe"));
+                        break;
+                    }
+                    dir = dir.Parent;
+                }
+            }
+            catch { }
+
+            candidates.AddRange(new[]
+            {
+                Path.Combine(baseDirectory, "..", "..", "..", "..", "GameProj", "bin", "Debug", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(baseDirectory, "..", "..", "..", "..", "GameProj", "bin", "Release", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(baseDirectory, "..", "..", "GameProj", "bin", "Debug", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(baseDirectory, "..", "..", "GameProj", "bin", "Release", "net8.0-windows", "GameProj.exe"),
+                Path.Combine(localAppData, "FindingNimo", "GameProj", "Debug", "win-x64", "GameProj.exe"),
+                Path.Combine(localAppData, "FindingNimo", "GameProj", "Release", "win-x64", "GameProj.exe"),
+                Path.Combine(baseDirectory, "GameProj.exe")
+            });
+
+            return candidates
+                .Select(p => Path.GetFullPath(p))
+                .Distinct(StringComparer.OrdinalIgnoreCase)
                 .FirstOrDefault(File.Exists);
         }
     }
