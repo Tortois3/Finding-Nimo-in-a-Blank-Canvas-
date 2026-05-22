@@ -114,6 +114,20 @@ namespace GameForms.Data
 
             await reader.CloseAsync();
 
+            const string existingNameSql = @"
+                SELECT 1
+                FROM tblPlayer
+                WHERE Name = @name
+                LIMIT 1;";
+
+            await using (var existingNameCmd = new SqliteCommand(existingNameSql, conn))
+            {
+                existingNameCmd.Parameters.AddWithValue("@name", nickname);
+                object? nameExists = await existingNameCmd.ExecuteScalarAsync();
+                if (nameExists != null && nameExists != DBNull.Value)
+                    throw new InvalidOperationException("Name already taken. Change it to continue");
+            }
+
             const string insertSql = @"
                 INSERT INTO tblPlayer (Name, Age, PasswordHash, CreatedAt, LastLoginAt)
                 VALUES (@name, @age, @passwordHash, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);";

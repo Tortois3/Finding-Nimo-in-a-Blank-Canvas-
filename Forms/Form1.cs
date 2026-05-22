@@ -7,11 +7,15 @@ namespace GameForms
     {
         private WindowsMediaPlayerHost? _gameIntroPlayer;
         private bool _introInitialized;
+        private bool _navigatingToForm2;
         private string _introPath = @"C:\Users\Tiffany Mae\Documents\PROJECT PROPOSAL\GameIntro.mp4";
 
         public Form1()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this, allowAutoScroll: false);
+
+            WireStartEverywhere();
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;
@@ -24,6 +28,7 @@ namespace GameForms
 
             this.Shown += Form1_Shown;
             this.FormClosed += (_, _) => ReleaseIntroPlayer();
+            this.Resize += (_, _) => LayoutResponsiveUi();
 
             this.KeyPreview = true;
             this.KeyDown += Form1_KeyDown;
@@ -31,14 +36,7 @@ namespace GameForms
 
         private void Form1_KeyDown(object? sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Enter)
-            {
-                e.SuppressKeyPress = true;
-                e.Handled = true;
-
-                StopToForm2();
-            }
-            else if (e.KeyCode == Keys.Escape)
+            if (e.KeyCode == Keys.Escape)
             {
                 e.SuppressKeyPress = true;
                 e.Handled = true;
@@ -53,6 +51,13 @@ namespace GameForms
                         Application.Exit();
                     }
                 }
+            }
+            else
+            {
+                // Any other key should start Form2
+                e.SuppressKeyPress = true;
+                e.Handled = true;
+                StopToForm2();
             }
         }
 
@@ -79,6 +84,8 @@ namespace GameForms
 
         private void Form1_Shown(object? sender, EventArgs e)
         {
+            LayoutResponsiveUi();
+
             if (_introInitialized)
                 return;
 
@@ -96,9 +103,14 @@ namespace GameForms
 
         private void StopToForm2()
         {
+            if (_navigatingToForm2)
+                return;
+
+            _navigatingToForm2 = true;
             ReleaseIntroPlayer();
             this.Hide();
             Form2 form2 = new Form2();
+            form2.FormClosed += (_, _) => Close();
             form2.Show();
         }
 
@@ -157,6 +169,8 @@ namespace GameForms
         {
             try
             {
+                GameIntroHost.Dock = DockStyle.Fill;
+                GameIntroHost.Location = System.Drawing.Point.Empty;
                 _gameIntroPlayer = new WindowsMediaPlayerHost
                 {
                     Dock = DockStyle.Fill,
@@ -178,6 +192,7 @@ namespace GameForms
                 _gameIntroPlayer = null;
                 GameIntroHost.Controls.Clear();
                 GameIntroHost.BackColor = System.Drawing.Color.Black;
+                GameIntroHost.Dock = DockStyle.Fill;
                 GameIntroHost.SendToBack();
             }
         }
@@ -232,6 +247,93 @@ namespace GameForms
             {
                 _gameIntroPlayer = null;
             }
+        }
+
+        // Wire clicks/mousedown of every control (recursively) to Start, except controls you want to keep.
+        // Update skipNames to include any control names that must retain their original behavior (e.g. EXIT).
+        private void WireStartEverywhere()
+        {
+            var skipNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase)
+            {
+                "EXIT" // keep original EXIT behavior
+                // add other control names here if needed
+            };
+
+            // Wire top-level form mouse events too
+            this.MouseDown -= Control_StartMouseDown;
+            this.MouseDown += Control_StartMouseDown;
+
+            WireControlsForStart(this.Controls, skipNames);
+        }
+
+        private void WireControlsForStart(Control.ControlCollection controls, HashSet<string> skipNames)
+        {
+            foreach (Control c in controls)
+            {
+                try
+                {
+                    if (string.IsNullOrEmpty(c.Name) || skipNames.Contains(c.Name))
+                        continue;
+
+                    // Attach both Click and MouseDown to be sure we catch input on different control types.
+                    c.Click -= Control_StartClick;
+                    c.Click += Control_StartClick;
+
+                    c.MouseDown -= Control_StartMouseDown;
+                    c.MouseDown += Control_StartMouseDown;
+
+                    // If control hosts children, wire them too
+                    if (c.HasChildren)
+                        WireControlsForStart(c.Controls, skipNames);
+                }
+                catch
+                {
+                    // Swallow exceptions so wiring never breaks startup; missing resources or special controls might throw.
+                }
+            }
+        }
+
+        private void Control_StartClick(object? sender, EventArgs e)
+        {
+            StopToForm2();
+        }
+
+        private void Control_StartMouseDown(object? sender, MouseEventArgs e)
+        {
+            // Only start for left-button presses to avoid interfering with right-click context menus.
+            if (e.Button == MouseButtons.Left)
+                StopToForm2();
+        }
+
+        private void LayoutResponsiveUi()
+        {
+            if (ClientSize.Width <= 0 || ClientSize.Height <= 0)
+                return;
+
+            GameIntroHost.Dock = DockStyle.Fill;
+
+            const int leftMargin = 24;
+            const int bottomMargin = 24;
+
+            EXIT.Location = new System.Drawing.Point(
+                leftMargin,
+                Math.Max(16, ClientSize.Height - EXIT.Height - bottomMargin));
+
+            START.Left = Math.Max(24, (ClientSize.Width - START.Width) / 2);
+            START.Top = Math.Max(80, (int)(ClientSize.Height * 0.32f));
+
+            pictureBox1.Width = Math.Min(ClientSize.Width - 120, Math.Max(800, (int)(ClientSize.Width * 0.62f)));
+            pictureBox1.Left = Math.Max(24, (ClientSize.Width - pictureBox1.Width) / 2);
+            pictureBox1.Top = START.Bottom - 10;
+
+            BEGIN.Left = Math.Max(24, (ClientSize.Width - BEGIN.Width) / 2);
+            BEGIN.Top = pictureBox1.Bottom + 8;
+
+            Controls.SetChildIndex(GameIntroHost, Controls.Count - 1);
+            START.BringToFront();
+            pictureBox1.BringToFront();
+            BEGIN.BringToFront();
+            EXIT.BringToFront();
         }
     }
 }

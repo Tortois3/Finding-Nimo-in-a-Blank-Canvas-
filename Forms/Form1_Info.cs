@@ -42,12 +42,23 @@ namespace GameForms
         {
             _playerRepo = playerRepo ?? throw new ArgumentNullException(nameof(playerRepo));
             InitializeComponent();
+            FormLayoutHelper.Configure(this);
             FormEscapeCloseBehavior.Attach(this);
             FormBorderStyle = FormBorderStyle.None;
+            AcceptButton = Save;
+            CancelButton = Cancel;
 
             // Default: password hidden
             tbPassword.PasswordChar = '●';
             btnShow.BringToFront();
+
+            ConfigureSingleLineInput(tBName);
+            ConfigureSingleLineInput(tbAge);
+            ConfigureSingleLineInput(tbPassword);
+
+            tBName.KeyDown += InputTextBox_KeyDown;
+            tbAge.KeyDown += InputTextBox_KeyDown;
+            tbPassword.KeyDown += InputTextBox_KeyDown;
 
             // Wire both buttons to the same toggle handler
             btnShow.Click += TogglePassword_Click;
@@ -173,6 +184,18 @@ namespace GameForms
             }
             catch (Exception ex)
             {
+                if (string.Equals(ex.Message, "Name already taken. Change it to continue", StringComparison.Ordinal))
+                {
+                    MessageBox.Show(
+                        ex.Message,
+                        "Validation Error",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                    tBName.Focus();
+                    tBName.SelectAll();
+                    return;
+                }
+
                 MessageBox.Show(
                     $"Failed to save player info: {ex.Message}",
                     "Save Error",
@@ -210,6 +233,25 @@ namespace GameForms
                 btnHide.BringToFront(); // eye-open icon
             else
                 btnShow.BringToFront(); // eye-closed icon
+        }
+
+        private static void ConfigureSingleLineInput(TextBox textBox)
+        {
+            textBox.Multiline = false;
+            textBox.AcceptsReturn = false;
+            textBox.AcceptsTab = false;
+            textBox.WordWrap = false;
+            textBox.ScrollBars = ScrollBars.None;
+        }
+
+        private void InputTextBox_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode != Keys.Enter)
+                return;
+
+            e.SuppressKeyPress = true;
+            e.Handled = true;
+            Ok_Click(Save, EventArgs.Empty);
         }
     }
 }

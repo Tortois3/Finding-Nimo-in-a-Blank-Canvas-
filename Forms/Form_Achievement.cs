@@ -44,6 +44,7 @@ namespace GameForms.Forms
         public Form_Achievement()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this);
             FormEscapeCloseBehavior.Attach(this);
             this.FormBorderStyle = FormBorderStyle.None;
 

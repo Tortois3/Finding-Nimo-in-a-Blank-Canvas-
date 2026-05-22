@@ -34,16 +34,15 @@
             page0 = new Panel();
             button2 = new Button();
             page2 = new Panel();
-            textBox3 = new TextBox();
             label6 = new Label();
             button4 = new Button();
-            page_1 = new Panel();
             button8 = new Button();
+            textBox3 = new TextBox();
+            page_1 = new Panel();
             textBox1 = new TextBox();
             label4 = new Label();
             next = new Button();
             page4 = new Panel();
-            button9 = new Button();
             button7 = new Button();
             textBox4 = new TextBox();
             label7 = new Label();
@@ -62,6 +61,7 @@
             button1 = new Button();
             label3 = new Label();
             label2 = new Label();
+            button12 = new Button();
             page0.SuspendLayout();
             page2.SuspendLayout();
             page_1.SuspendLayout();
@@ -116,23 +116,14 @@
             // 
             // page2
             // 
-            page2.Controls.Add(textBox3);
             page2.Controls.Add(label6);
             page2.Controls.Add(button4);
-            page2.Controls.Add(page_1);
+            page2.Controls.Add(button8);
+            page2.Controls.Add(textBox3);
             page2.Location = new Point(37, 140);
             page2.Name = "page2";
             page2.Size = new Size(779, 846);
-            page2.TabIndex = 22;
-            // 
-            // textBox3
-            // 
-            textBox3.Font = new Font("Pixel Operator SC", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            textBox3.Location = new Point(43, 62);
-            textBox3.Multiline = true;
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(703, 678);
-            textBox3.TabIndex = 3;
+            page2.TabIndex = 24;
             // 
             // label6
             // 
@@ -156,28 +147,36 @@
             button4.TabIndex = 1;
             button4.UseVisualStyleBackColor = true;
             // 
+            // button8
+            // 
+            button8.FlatStyle = FlatStyle.Flat;
+            button8.Font = new Font("Pixel Operator SC", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            button8.Image = (Image)resources.GetObject("button8.Image");
+            button8.Location = new Point(43, 763);
+            button8.Name = "button8";
+            button8.Size = new Size(56, 65);
+            button8.TabIndex = 26;
+            button8.UseVisualStyleBackColor = true;
+            button8.Click += button8_Click_1;
+            // 
+            // textBox3
+            // 
+            textBox3.Font = new Font("Pixel Operator SC", 12F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            textBox3.Location = new Point(43, 62);
+            textBox3.Multiline = true;
+            textBox3.Name = "textBox3";
+            textBox3.Size = new Size(703, 678);
+            textBox3.TabIndex = 3;
+            // 
             // page_1
             // 
-            page_1.Controls.Add(button8);
             page_1.Controls.Add(textBox1);
             page_1.Controls.Add(label4);
             page_1.Controls.Add(next);
-            page_1.Location = new Point(0, 0);
+            page_1.Location = new Point(37, 140);
             page_1.Name = "page_1";
             page_1.Size = new Size(779, 846);
-            page_1.TabIndex = 20;
-            // 
-            // button8
-            // 
-            button8.BackgroundImage = (Image)resources.GetObject("button8.BackgroundImage");
-            button8.FlatStyle = FlatStyle.Flat;
-            button8.Font = new Font("Pixel Operator SC", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button8.Location = new Point(43, 758);
-            button8.Name = "button8";
-            button8.Size = new Size(56, 65);
-            button8.TabIndex = 25;
-            button8.UseVisualStyleBackColor = true;
-            button8.Click += button8_Click_1;
+            page_1.TabIndex = 27;
             // 
             // textBox1
             // 
@@ -214,7 +213,6 @@
             // 
             // page4
             // 
-            page4.Controls.Add(button9);
             page4.Controls.Add(button7);
             page4.Controls.Add(textBox4);
             page4.Controls.Add(label7);
@@ -223,17 +221,6 @@
             page4.Name = "page4";
             page4.Size = new Size(779, 846);
             page4.TabIndex = 21;
-            // 
-            // button9
-            // 
-            button9.BackgroundImage = (Image)resources.GetObject("button9.BackgroundImage");
-            button9.FlatStyle = FlatStyle.Flat;
-            button9.Font = new Font("Pixel Operator SC", 48F, FontStyle.Regular, GraphicsUnit.Point, 0);
-            button9.Location = new Point(361, 391);
-            button9.Name = "button9";
-            button9.Size = new Size(56, 65);
-            button9.TabIndex = 26;
-            button9.UseVisualStyleBackColor = true;
             // 
             // button7
             // 
@@ -438,6 +425,13 @@
             label2.Text = resources.GetString("label2.Text");
             label2.TextAlign = ContentAlignment.MiddleCenter;
             // 
+            // button12
+            // 
+            button12.Location = new Point(0, 0);
+            button12.Name = "button12";
+            button12.Size = new Size(75, 23);
+            button12.TabIndex = 0;
+            // 
             // Form_Memoir
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -448,11 +442,12 @@
             Controls.Add(ABOUT);
             Controls.Add(label1);
             Controls.Add(page2);
-            Controls.Add(page4);
             Controls.Add(page5);
             Controls.Add(page0);
+            Controls.Add(page_1);
             Controls.Add(panelAbout);
             Controls.Add(page3);
+            Controls.Add(page4);
             ForeColor = SystemColors.GrayText;
             Name = "Form_Memoir";
             StartPosition = FormStartPosition.CenterScreen;
@@ -505,9 +500,9 @@
         private Label label8;
         private Button button6;
         private Button button7;
-        private Button button9;
         private Button button10;
         private Button button11;
         private Button button8;
+        private Button button12;
     }
 }

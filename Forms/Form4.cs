@@ -23,6 +23,7 @@ namespace GameForms.Forms
         public Form4()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this, allowAutoScroll: false);
             this.FormBorderStyle = FormBorderStyle.None;
 
             this.KeyPreview = true;

@@ -50,6 +50,7 @@ namespace GameForms
 
             KeyPreview = true;
             KeyDown += Form2_KeyDown;
+            Resize += (_, _) => LayoutResponsiveUi();
 
             AlignPersistentMenuButtons();
             GameIntroHost.SendToBack();
@@ -261,6 +262,8 @@ namespace GameForms
 
         private async void Form2_Shown(object? sender, EventArgs e)
         {
+            LayoutResponsiveUi();
+
             if (!_introInitialized)
             {
                 _introInitialized = true;
@@ -687,10 +690,51 @@ namespace GameForms
 
         private void AlignPersistentMenuButtons()
         {
-            USERINFO.Location = new System.Drawing.Point(HISTORY.Left, HISTORY.Top - 93);
+            LayoutResponsiveUi();
 
             if (USERINFO.BackgroundImage == null)
                 USERINFO.Text = "i";
+        }
+
+        private void LayoutResponsiveUi()
+        {
+            if (ClientSize.Width <= 0 || ClientSize.Height <= 0)
+                return;
+
+            const int leftMargin = 24;
+            const int bottomMargin = 24;
+            const int iconSpacing = 12;
+
+            int bottomIconY = Math.Max(16, ClientSize.Height - EXIT.Height - bottomMargin);
+            EXIT.Location = new System.Drawing.Point(leftMargin, bottomIconY);
+            ABOUT.Location = new System.Drawing.Point(leftMargin, EXIT.Top - ABOUT.Height - iconSpacing);
+            HISTORY.Location = new System.Drawing.Point(leftMargin, ABOUT.Top - HISTORY.Height - iconSpacing);
+            USERINFO.Location = new System.Drawing.Point(leftMargin, HISTORY.Top - USERINFO.Height - iconSpacing);
+
+            int rightMargin = 36;
+            int startLeft = Math.Max(24, ClientSize.Width - button3.Width - rightMargin);
+            int achievementLeft = Math.Max(24, ClientSize.Width - button4.Width - rightMargin);
+
+            int stackTop = Math.Max(280, (int)(ClientSize.Height * 0.52f));
+            const int primaryToSecondaryGap = 14;
+            const int groupGap = 20;
+
+            button3.Left = startLeft;
+            button3.Top = stackTop;
+
+            button5.Left = button3.Right - button5.Width;
+            button5.Top = button3.Bottom + primaryToSecondaryGap;
+
+            button4.Left = achievementLeft;
+            button4.Top = button5.Bottom + groupGap;
+
+            memoir.Left = button4.Right - memoir.Width;
+            memoir.Top = button4.Bottom + primaryToSecondaryGap;
+
+            label1.Left = Math.Max(24, ClientSize.Width - label1.Width - rightMargin);
+            label1.Top = Math.Max(16, ClientSize.Height - label1.Height - bottomMargin);
+
+            RestoreFrontUiOrder();
         }
     }
 }

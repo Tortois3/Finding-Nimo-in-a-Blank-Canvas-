@@ -226,7 +226,7 @@
             tBPin.Font = new Font("Pixel Operator Mono", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tBPin.ForeColor = SystemColors.Info;
             tBPin.Location = new Point(180, 222);
-            tBPin.Multiline = true;
+            tBPin.Multiline = false;
             tBPin.Name = "tBPin";
             tBPin.PasswordChar = '■';
             tBPin.Size = new Size(636, 58);

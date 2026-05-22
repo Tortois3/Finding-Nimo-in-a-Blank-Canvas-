@@ -15,6 +15,7 @@ namespace GameForms
         public Form3()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this, allowAutoScroll: false);
 
             this.FormBorderStyle = FormBorderStyle.None;
             this.WindowState = FormWindowState.Maximized;

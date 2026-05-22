@@ -28,6 +28,7 @@ namespace GameForms.Forms
         public Form_Memoir()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this);
             InitializeMemoirLayout();
             WireMemoirPersistence();
             Load += Form_Memoir_Load;
@@ -68,8 +69,12 @@ namespace GameForms.Forms
             button3.Click += (_, _) => ShowMemoirPage(4);
             button5.Click -= button5_Click;
             button5.Click += (_, _) => ShowMemoirPage(5);
-            button8.Click -= button8_Click_1;
-            button8.Click += (_, _) => ShowMemoirPage(0);
+            // when wiring/unwiring, guard null to avoid runtime NREs
+            if (button8 != null)
+            {
+                button8.Click -= button8_Click_1;
+                button8.Click += (_, _) => ShowMemoirPage(0);
+            }
             button11.Click -= button11_Click;
             button11.Click += (_, _) => ShowMemoirPage(2);
             button7.Click -= button7_Click;
@@ -249,7 +254,7 @@ namespace GameForms.Forms
 
         private void button8_Click_1(object sender, EventArgs e) //page 2 prev page
         {
-            ShowMemoirPage(0);
+            ShowMemoirPage(1);
         }
     }
 }

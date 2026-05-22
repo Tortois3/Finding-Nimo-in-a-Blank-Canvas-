@@ -33,10 +33,8 @@
             START = new Label();
             pictureBox1 = new PictureBox();
             BEGIN = new Label();
-            pictureBox2 = new PictureBox();
             GameIntroHost = new Panel();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             SuspendLayout();
             // 
             // EXIT
@@ -45,9 +43,10 @@
             EXIT.BackgroundImage = (Image)resources.GetObject("EXIT.BackgroundImage");
             EXIT.BackgroundImageLayout = ImageLayout.Center;
             EXIT.FlatStyle = FlatStyle.Flat;
-            EXIT.Location = new Point(32, 979);
+            EXIT.Location = new Point(28, 734);
+            EXIT.Margin = new Padding(3, 2, 3, 2);
             EXIT.Name = "EXIT";
-            EXIT.Size = new Size(75, 75);
+            EXIT.Size = new Size(66, 56);
             EXIT.TabIndex = 0;
             EXIT.UseVisualStyleBackColor = false;
             EXIT.Click += EXIT_Click;
@@ -60,9 +59,9 @@
             START.FlatStyle = FlatStyle.Popup;
             START.Font = new Font("Pixel Operator SC", 130.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             START.ForeColor = Color.Snow;
-            START.Location = new Point(448, 374);
+            START.Location = new Point(392, 280);
             START.Name = "START";
-            START.Size = new Size(1038, 217);
+            START.Size = new Size(832, 174);
             START.TabIndex = 1;
             START.Text = "START GAME";
             START.Click += START_Click;
@@ -71,9 +70,10 @@
             // 
             pictureBox1.BackColor = Color.Black;
             pictureBox1.BackgroundImage = (Image)resources.GetObject("pictureBox1.BackgroundImage");
-            pictureBox1.Location = new Point(390, 567);
+            pictureBox1.Location = new Point(341, 425);
+            pictureBox1.Margin = new Padding(3, 2, 3, 2);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(1149, 24);
+            pictureBox1.Size = new Size(1005, 18);
             pictureBox1.TabIndex = 2;
             pictureBox1.TabStop = false;
             pictureBox1.Click += pictureBox1_Click;
@@ -84,44 +84,36 @@
             BEGIN.BackColor = Color.Black;
             BEGIN.Font = new Font("Pixel Operator SC", 40.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
             BEGIN.ForeColor = SystemColors.ControlDarkDark;
-            BEGIN.Location = new Point(779, 594);
+            BEGIN.Location = new Point(682, 446);
             BEGIN.Name = "BEGIN";
-            BEGIN.Size = new Size(395, 67);
+            BEGIN.Size = new Size(325, 54);
             BEGIN.TabIndex = 3;
             BEGIN.Text = "CLICK TO BEGIN";
             BEGIN.Click += BEGIN_Click;
             // 
-            // pictureBox2
-            // 
-            pictureBox2.BackColor = SystemColors.ActiveCaptionText;
-            pictureBox2.Location = new Point(-6, 1049);
-            pictureBox2.Name = "pictureBox2";
-            pictureBox2.Size = new Size(1960, 74);
-            pictureBox2.TabIndex = 5;
-            pictureBox2.TabStop = false;
-            // 
             // GameIntroHost
             // 
             GameIntroHost.BackColor = Color.Black;
-            GameIntroHost.Location = new Point(-19, -5);
+            GameIntroHost.Location = new Point(-17, -4);
+            GameIntroHost.Margin = new Padding(3, 2, 3, 2);
             GameIntroHost.Name = "GameIntroHost";
-            GameIntroHost.Size = new Size(2026, 1173);
+            GameIntroHost.Size = new Size(1773, 880);
             GameIntroHost.TabIndex = 26;
             // 
             // Form1
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.ActiveCaptionText;
-            ClientSize = new Size(1886, 1055);
+            ClientSize = new Size(1650, 791);
             Controls.Add(GameIntroHost);
-            Controls.Add(pictureBox2);
             Controls.Add(BEGIN);
             Controls.Add(pictureBox1);
             Controls.Add(START);
             Controls.Add(EXIT);
             Cursor = Cursors.PanNW;
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 2, 3, 2);
             MaximizeBox = false;
             Name = "Form1";
             StartPosition = FormStartPosition.CenterScreen;
@@ -129,7 +121,6 @@
             WindowState = FormWindowState.Maximized;
             Load += Form1_Load;
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
-            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -140,7 +131,6 @@
         private Label START;
         private PictureBox pictureBox1;
         private Label BEGIN;
-        private PictureBox pictureBox2;
         private Panel GameIntroHost;
     }
 }

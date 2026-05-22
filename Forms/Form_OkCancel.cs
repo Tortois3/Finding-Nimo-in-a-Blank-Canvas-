@@ -28,6 +28,7 @@ namespace GameForms
         public Exit()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this);
             FormEscapeCloseBehavior.Attach(this);
             this.FormBorderStyle = FormBorderStyle.None;
         }

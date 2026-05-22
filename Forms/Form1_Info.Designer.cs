@@ -235,7 +235,7 @@
             tbAge.Font = new Font("Pixel Operator Mono", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbAge.ForeColor = SystemColors.Menu;
             tbAge.Location = new Point(647, 274);
-            tbAge.Multiline = true;
+            tbAge.Multiline = false;
             tbAge.Name = "tbAge";
             tbAge.Size = new Size(120, 58);
             tbAge.TabIndex = 13;
@@ -258,7 +258,7 @@
             tBName.Font = new Font("Pixel Operator Mono", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tBName.ForeColor = SystemColors.Info;
             tBName.Location = new Point(178, 181);
-            tBName.Multiline = true;
+            tBName.Multiline = false;
             tBName.Name = "tBName";
             tBName.Size = new Size(589, 58);
             tBName.TabIndex = 6;
@@ -309,7 +309,7 @@
             tbPassword.Font = new Font("Pixel Operator Mono", 25.8000011F, FontStyle.Regular, GraphicsUnit.Point, 0);
             tbPassword.ForeColor = SystemColors.Info;
             tbPassword.Location = new Point(178, 274);
-            tbPassword.Multiline = true;
+            tbPassword.Multiline = false;
             tbPassword.Name = "tbPassword";
             tbPassword.PasswordChar = '*';
             tbPassword.Size = new Size(439, 58);

@@ -41,6 +41,7 @@ namespace GameForms.Forms
         public Form_Creator()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this, allowAutoScroll: false);
             FormEscapeCloseBehavior.Attach(this);
             FormBorderStyle = FormBorderStyle.None;
             WindowState = FormWindowState.Maximized;

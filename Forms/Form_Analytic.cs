@@ -37,6 +37,7 @@ namespace GameForms.Forms
         public Form_Analytic()
         {
             InitializeComponent();
+            FormLayoutHelper.Configure(this);
             FormEscapeCloseBehavior.Attach(this);
             FormBorderStyle = FormBorderStyle.None;
             StartPosition = FormStartPosition.CenterParent;
